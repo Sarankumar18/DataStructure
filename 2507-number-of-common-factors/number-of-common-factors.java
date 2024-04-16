@@ -1,8 +1,8 @@
 class Solution {
     public int commonFactors(int a, int b) {
         int count =0; 
-
-        for(int i =1; i<= 1000 && (i <= a && i <= b); i++){
+        int small = (a > b) ? b : a ;
+        for(int i =1; i <= small; i++){
             if((a % i == 0) && (b % i ==0))
                 count++;
         }
