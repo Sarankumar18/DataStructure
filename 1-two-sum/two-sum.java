@@ -5,12 +5,11 @@ class Solution {
         int y = -1;
         for(int i =0; i<nums.length; i++){
             if(map.containsKey(target-nums[i])){
-                x = map.get(target - nums[i]);
-                y = i;
-                break;
+                return new int[]{map.get(target - nums[i]),i};
             }
             map.put(nums[i],i);
         }
-        return new int[]{x,y};
+        
+        return new int[]{-1,-1};
     }
 }
