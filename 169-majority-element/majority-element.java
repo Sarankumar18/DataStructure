@@ -2,7 +2,7 @@ class Solution {
     public int majorityElement(int[] nums) {
         int vote = 0;
         int ele = 0;
-
+        HashMap<Integer,Integer> map = new HashMap<>();
         for(int i = 0 ; i< nums.length ; i++){
             if(vote == 0){
                 ele = nums[i];
@@ -13,16 +13,15 @@ class Solution {
             }else{
                 vote--;
             }
+            map.put(nums[i], map.getOrDefault(nums[i],0)+1);
         }
-        vote =0;
-        for(int i =0; i< nums.length; i++){
-            if(ele == nums[i]){
-                vote++;
+
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            if(entry.getValue() > nums.length/2){
+                return entry.getKey();
             }
         }
-        if(vote >= nums.length/2)
-            return ele;
-        
+            
         return -1;
 
     }
