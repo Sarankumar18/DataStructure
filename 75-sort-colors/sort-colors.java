@@ -1,40 +1,27 @@
 class Solution {
     public void sortColors(int[] nums) {
-        mergeSort(nums,0,nums.length-1);
+       int low = 0;
+       int mid = 0;
+       int high = nums.length-1;
+       while(mid <= high){
+        if(nums[mid] == 0){
+            swap(nums,low,mid);
+            low++;
+            mid++;
+        }else if(nums[mid] == 1){
+            mid++;
+        }else{
+            swap(nums,mid,high);
+            high--;
+        }
+       }
     }
 
-    static void mergeSort(int[] nums, int low, int high){
-        if(low >= high)
-            return;
-        int mid = (low + high) /2;
-        mergeSort(nums,low, mid);
-        mergeSort(nums, mid+1, high);
-        merge(nums, low, mid, high);
+    public static void swap(int nums[],int ind1, int ind2){
+        int temp = nums[ind1];
+        nums[ind1] = nums[ind2];
+        nums[ind2] = temp;
     }
 
-    static void merge(int[] nums, int low,int mid, int high){
-        int left = low;
-        int right = mid+1;
-        int temp[] = new int[high+1];
-        int k =0;
-        while(left <= mid && right <= high){
-            if(nums[left] <= nums[right]){
-                temp[k++] = nums[left++];
-            }else{
-                temp[k++] = nums[right++];
-            }
-        }
-
-        while(left <= mid){
-            temp[k++] = nums[left++];
-        }
-        while(right <= high){
-            temp[k++] = nums[right++];
-        }
-
-        k=0;
-        for(int i=low; i<= high; i++ ){
-            nums[i] = temp[k++];
-        }
-    }
+    
 }
